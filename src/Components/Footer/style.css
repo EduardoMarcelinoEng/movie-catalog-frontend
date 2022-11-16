@@ -1,0 +1,13 @@
+.footer {
+    margin-top: 5em;
+}
+
+.footer p {
+    text-align: center;
+    color: var(--color-light);
+}
+
+.footer p a {
+    text-decoration: none;
+    color: var(--color-primary);
+}

@@ -1,0 +1,19 @@
+.more-information-centered-modal .modal-content img {
+    height: 300px;
+    width: 100%;
+}
+
+.more-information-centered-modal .modal-footer .btn {
+    border: none;
+}
+
+.more-information-centered-modal .modal-footer .btn,
+.more-information-centered-modal .modal-footer .btn:is(:active, :hover) {
+    background-color: var(--color-primary);;
+}
+
+@media only screen and (max-width: 992px) {
+    .more-information-centered-modal .modal-content img {
+        margin-bottom: 20px;
+    }
+}

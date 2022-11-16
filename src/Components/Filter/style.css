@@ -1,0 +1,19 @@
+.filter svg, .filter label {
+    color: var(--color-active);
+}
+
+#filter-btn button {
+    background-color: var(--color-primary);
+    width: 100%;
+    border: none;
+}
+
+@media screen and (min-width: 768px) {
+    #filter-btn .form-label {
+        width: 100%;
+        margin-bottom: 22px;
+    }
+    #filter-btn button {
+        width: auto;
+    }
+}

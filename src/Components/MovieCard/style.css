@@ -1,0 +1,23 @@
+.movie-card.card {
+    width: 18rem;
+    border: 2px solid var(--color-border);
+}
+
+.movie-card img {
+    height: 200px;
+}
+
+.movie-card .btn {
+    border: none;
+    padding: 0;
+}
+
+.movie-card .btn,
+.movie-card .card-body .btn:is(:hover,:active) {
+    background-color: unset;
+}
+
+.movie-card .btn svg {
+    color: var(--color-primary);
+    font-size: 1.5em;
+}
