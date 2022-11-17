@@ -42,46 +42,46 @@ export default function Filter(){
                 <Container>
                     <Row xs={1} md={4} lg={6}>
                         
-                            <Col>
-                                <Form.Group className="mb-3" controlId="formBasicEmail">
-                                    <Form.Label>Id</Form.Label>
-                                    <Form.Control value={ id } onChange={ e=>setId(e.target.value) } type="text" placeholder="Digite o id do filme" />
-                                </Form.Group>
-                            </Col>
-                            <Col>
-                                <Form.Group className="mb-3" controlId="formBasicEmail">
-                                    <Form.Label>Título</Form.Label>
-                                    <Form.Control value={ title } onChange={ e=>setTitle(e.target.value) } type="text" placeholder="Digite o título do filme" />
-                                </Form.Group>
-                            </Col>
-                            <Col>
-                                <Form.Group className="mb-3" controlId="formBasicEmail">
-                                    <Form.Label>Descrição</Form.Label>
-                                    <Form.Control value={ description } onChange={ e=>setDescription(e.target.value) } type="text" placeholder="Digite a descrição do filme" />
-                                </Form.Group>
-                            </Col>
-                            <Col>
-                                <Form.Group className="mb-3" controlId="formBasicEmail">
-                                    <Form.Label>Diretor</Form.Label>
-                                    <Form.Control value={ director } onChange={ e=>setDirector(e.target.value) } type="text" placeholder="Digite o diretor do filme" />
-                                </Form.Group>
-                            </Col>
-                            <Col>
-                                <Form.Group className="mb-3" controlId="formBasicEmail">
-                                    <Form.Label>Produtor</Form.Label>
-                                    <Form.Control value={ producer } onChange={ e=>setProducer(e.target.value) } type="text" placeholder="Digite o produtor do filme" />
-                                </Form.Group>
-                            </Col>
-                            <Col>
-                                {<Form.Group id="filter-btn" className="mb-3" controlId="formBasicEmail">
-                                    <Form.Label></Form.Label>
-                                    <Link onClick={toFilter} to={`/?${queryStringBuilder()}`}>
-                                        <Button variant="success">
-                                            <FontAwesomeIcon icon={faMagnifyingGlass} />
-                                        </Button>
-                                    </Link>
-                                </Form.Group>}
-                            </Col>
+                        <Col>
+                            <Form.Group className="mb-3" controlId="formBasicEmail">
+                                <Form.Label>Id</Form.Label>
+                                <Form.Control value={ id } onChange={ e=>setId(e.target.value) } type="text" placeholder="Digite o id do filme" />
+                            </Form.Group>
+                        </Col>
+                        <Col>
+                            <Form.Group className="mb-3" controlId="formBasicEmail">
+                                <Form.Label>Título</Form.Label>
+                                <Form.Control value={ title } onChange={ e=>setTitle(e.target.value) } type="text" placeholder="Digite o título do filme" />
+                            </Form.Group>
+                        </Col>
+                        <Col>
+                            <Form.Group className="mb-3" controlId="formBasicEmail">
+                                <Form.Label>Descrição</Form.Label>
+                                <Form.Control value={ description } onChange={ e=>setDescription(e.target.value) } type="text" placeholder="Digite a descrição do filme" />
+                            </Form.Group>
+                        </Col>
+                        <Col>
+                            <Form.Group className="mb-3" controlId="formBasicEmail">
+                                <Form.Label>Diretor</Form.Label>
+                                <Form.Control value={ director } onChange={ e=>setDirector(e.target.value) } type="text" placeholder="Digite o diretor do filme" />
+                            </Form.Group>
+                        </Col>
+                        <Col>
+                            <Form.Group className="mb-3" controlId="formBasicEmail">
+                                <Form.Label>Produtor</Form.Label>
+                                <Form.Control value={ producer } onChange={ e=>setProducer(e.target.value) } type="text" placeholder="Digite o produtor do filme" />
+                            </Form.Group>
+                        </Col>
+                        <Col>
+                            {<Form.Group id="filter-btn" className="mb-3" controlId="formBasicEmail">
+                                <Form.Label></Form.Label>
+                                <Link onClick={toFilter} to={`/?${queryStringBuilder()}`}>
+                                    <Button variant="success">
+                                        <FontAwesomeIcon icon={faMagnifyingGlass} />
+                                    </Button>
+                                </Link>
+                            </Form.Group>}
+                        </Col>
                         
                     </Row>
                 </Container>

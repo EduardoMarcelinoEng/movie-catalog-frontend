@@ -1,0 +1,5 @@
+.database-update-modal .btn:nth-child(1) {
+    background-color: unset;
+    border: none;
+    color: #000;
+}

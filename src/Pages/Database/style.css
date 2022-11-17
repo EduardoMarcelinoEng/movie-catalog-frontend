@@ -1,0 +1,12 @@
+.database table {
+    border: 1px solid var(--color-active);
+}
+
+.database table thead {
+    background-color: var(--color-primary);
+    color: var(--color-light);
+}
+
+.database table tbody td:nth-child(1) {
+    color: var(--color-light);
+}

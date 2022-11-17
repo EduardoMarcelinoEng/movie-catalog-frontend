@@ -7,6 +7,9 @@ export default {
             return axios.get(`${config.host}/movie`, {
                 params: data
             });
+        },
+        findApi(){
+            return axios.post(`${config.host}/movie`);
         }
     }
 }

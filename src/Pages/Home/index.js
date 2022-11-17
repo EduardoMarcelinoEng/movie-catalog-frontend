@@ -13,7 +13,7 @@ export default function Home(){
 
     const { movies, isLoading, pagination } = useSelector(state=>state.movieState);
     const dispatch = useDispatch();
-    const [searchParams, setSearchParams] = useSearchParams();
+    const [searchParams] = useSearchParams();
 
     const queryObject = {
         id: searchParams.get('id') || '',
@@ -65,6 +65,5 @@ export default function Home(){
                 </Row>
             </Container>
         </>
-        
     );
 }
