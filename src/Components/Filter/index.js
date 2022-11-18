@@ -7,6 +7,7 @@ import http from './../../services/http';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFilter, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import './style.css';
+import utils from '../../utils';
 
 export default function Filter(){
 
@@ -29,7 +30,12 @@ export default function Filter(){
             activePage, id, title, description, director, producer
         }
         http.movie.load(query)
-            .then(result=>dispatch({type: 'LOADED_MOVIE', payload: result.data}));
+            .then(result=>dispatch({type: 'LOADED_MOVIE', payload: result.data}))
+            .catch(error=>utils.createNotification({
+                type: 'error',
+                title: 'Erro ao filtrar filmes!',
+                message: error && error.response && error.response.data ? error.response.data : ''
+            }));
     }
 
     return (

@@ -8,6 +8,7 @@ import http from '../../services/http';
 import Footer from '../../Components/Footer';
 import './style.css';
 import { useSearchParams } from 'react-router-dom';
+import utils from '../../utils';
 
 export default function Home(){
 
@@ -27,7 +28,16 @@ export default function Home(){
     useEffect(()=>{
         dispatch({type: 'IS_LOADING_MOVIE', payload: true});
         http.movie.load(queryObject)
-            .then(result=>dispatch({type: 'LOADED_MOVIE', payload: result.data}));
+            .then(result=>dispatch({type: 'LOADED_MOVIE', payload: result.data}))
+            .catch(error=>{
+                console.log('Olhar', error.response);
+                utils.createNotification({
+                    type: 'error',
+                    title: 'Erro ao carregar filmes!',
+                    message: error && error.response && error.response.data ? error.response.data : ''
+                });
+                dispatch({type: 'IS_LOADING_MOVIE', payload: false});
+            });
     }, []);
 
     return (
