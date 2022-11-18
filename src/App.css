@@ -18,3 +18,7 @@ html {
   display: flex;
   justify-content: center;
 }
+
+button.btn {
+  border: none;
+}

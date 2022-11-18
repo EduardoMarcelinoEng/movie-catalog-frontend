@@ -10,6 +10,9 @@ export default {
         },
         findApi(){
             return axios.post(`${config.host}/movie`);
+        },
+        destroy(){
+            return axios.delete(`${config.host}/movie`);
         }
     }
 }

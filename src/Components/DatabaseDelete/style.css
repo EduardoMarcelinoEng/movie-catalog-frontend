@@ -1,0 +1,14 @@
+.database-delete {
+    display: inline-block;
+}
+
+.database-delete-modal .btn:nth-child(1) {
+    background-color: unset;
+    color: #000;
+}
+
+.database-delete-modal .btn:nth-child(2),
+.database-delete button.btn,
+.database-delete button.btn:active {
+    background-color: var(--color-danger);
+}
