@@ -1,5 +1,5 @@
 //Variable that defines the current environment
-const env = "development";
+const env = "production";
 
 //Environment settings development
 const development = {
