@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, Row, Col, Button, Navbar, Form } from 'react-bootstrap';
-import { Link, useSearchParams } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import http from './../../services/http';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -9,34 +9,31 @@ import { faFilter, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import './style.css';
 import utils from '../../utils';
 
-export default function Filter(){
+export default function Filter({ id, setId, description, title, setTitle, setDescription, director, setDirector, producer, setProducer, activePage }){
 
     const dispatch = useDispatch();
-    const [searchParams] = useSearchParams();
+    const [searchParams, setSearchParams] = useSearchParams();
 
-    const [activePage] = useState(searchParams.get('activePage') || '');
-    const [id, setId] = useState(searchParams.get('id') || '');
-    const [title, setTitle] = useState(searchParams.get('title') || '');
-    const [description, setDescription] = useState(searchParams.get('description') || '');
-    const [director, setDirector] = useState(searchParams.get('director') || '');
-    const [producer, setProducer] = useState(searchParams.get('producer') || '');
-
-    const queryStringBuilder = ()=>{
-        return `activePage=${activePage}&id=${id}&title=${title}&description=${description}&director=${director}&producer=${producer}`;
-    }
-
-    const toFilter = ()=>{
-        let query = {
-            activePage, id, title, description, director, producer
-        }
-        http.movie.load(query)
+    const filter = ()=>{
+        setSearchParams(`id=${id}&title=${title}&description=${description}&director=${director}&producer=${producer}`);
+        dispatch({type: 'IS_LOADING_MOVIE', payload: true});
+        http.movie.load({
+            id,
+            title,
+            description,
+            director,
+            producer
+        })
             .then(result=>dispatch({type: 'LOADED_MOVIE', payload: result.data}))
-            .catch(error=>utils.createNotification({
-                type: 'error',
-                title: 'Erro ao filtrar filmes!',
-                message: error && error.response && error.response.data ? error.response.data : ''
-            }));
-    }
+            .catch(error=>{
+                utils.createNotification({
+                    type: 'error',
+                    title: 'Erro ao carregar filmes!',
+                    message: error && error.response && error.response.data ? error.response.data : ''
+                });
+                dispatch({type: 'IS_LOADING_MOVIE', payload: false});
+            });
+    };
 
     return (
         <Navbar className='filter' expand="lg" style={{textTransform: 'uppercase'}}>
@@ -47,7 +44,6 @@ export default function Filter(){
             <Navbar.Collapse id="navbarScroll">
                 <Container>
                     <Row xs={1} md={4} lg={6}>
-                        
                         <Col>
                             <Form.Group className="mb-3" controlId="formBasicEmail">
                                 <Form.Label>Id</Form.Label>
@@ -81,14 +77,11 @@ export default function Filter(){
                         <Col>
                             {<Form.Group id="filter-btn" className="mb-3" controlId="formBasicEmail">
                                 <Form.Label></Form.Label>
-                                <Link onClick={toFilter} to={`/?${queryStringBuilder()}`}>
-                                    <Button variant="success">
+                                    <Button onClick={()=>filter({activePage: 1})} variant="success">
                                         <FontAwesomeIcon icon={faMagnifyingGlass} />
                                     </Button>
-                                </Link>
                             </Form.Group>}
                         </Col>
-                        
                     </Row>
                 </Container>
             </Navbar.Collapse>

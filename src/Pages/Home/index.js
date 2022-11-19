@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Container, Row, Col, Spinner } from 'react-bootstrap';
 import Header from '../../Components/Header';
 import MovieCard from '../../Components/MovieCard';
@@ -9,28 +9,35 @@ import Footer from '../../Components/Footer';
 import './style.css';
 import { useSearchParams } from 'react-router-dom';
 import utils from '../../utils';
+import Pagination from '../../Components/Pagination';
 
 export default function Home(){
 
-    const { movies, isLoading, pagination } = useSelector(state=>state.movieState);
+    const { movies, isLoading, search } = useSelector(state=>state.movieState);
     const dispatch = useDispatch();
-    const [searchParams] = useSearchParams();
+    const [searchParams, setSearchParams] = useSearchParams();
 
-    const queryObject = {
-        id: searchParams.get('id') || '',
-        title: searchParams.get('title') || '',
-        description: searchParams.get('description') || '',
-        director: searchParams.get('director') || '',
-        producer: searchParams.get('producer') || '',
-        activePage: searchParams.get('activePage') || ''
-    }
+    //Fields of search
+    const [activePage, setActivePage] = useState(Number(searchParams.get('activePage')) || 1);
+    const [id, setId] = useState(searchParams.get('id') || '');
+    const [title, setTitle] = useState(searchParams.get('title') || '');
+    const [description, setDescription] = useState(searchParams.get('description') || '');
+    const [director, setDirector] = useState(searchParams.get('director') || '');
+    const [producer, setProducer] = useState(searchParams.get('producer') || '');
 
-    useEffect(()=>{
+    const filter = ()=>{
+        setSearchParams(`activePage=${activePage}&id=${id}&title=${title}&description=${description}&director=${director}&producer=${producer}`);
         dispatch({type: 'IS_LOADING_MOVIE', payload: true});
-        http.movie.load(queryObject)
+        http.movie.load({
+            id,
+            title,
+            description,
+            director,
+            producer,
+            activePage
+        })
             .then(result=>dispatch({type: 'LOADED_MOVIE', payload: result.data}))
             .catch(error=>{
-                console.log('Olhar', error.response);
                 utils.createNotification({
                     type: 'error',
                     title: 'Erro ao carregar filmes!',
@@ -38,6 +45,10 @@ export default function Home(){
                 });
                 dispatch({type: 'IS_LOADING_MOVIE', payload: false});
             });
+    };
+
+    useEffect(()=>{
+        filter();
     }, []);
 
     return (
@@ -45,7 +56,20 @@ export default function Home(){
             <Header />
             <Container>
                 <Row>
-                    <Filter />
+                    <Filter
+                        id={ id }
+                        setId={ setId }
+                        title={ title }
+                        setTitle={ setTitle }
+                        description={ description }
+                        setDescription={ setDescription }
+                        director={ director }
+                        setDirector={ setDirector }
+                        producer={ producer }
+                        setProducer={ setProducer }
+                        activePage={ activePage }
+                        filter={ filter }
+                    />
                 </Row>
                 <Row>
                     {
@@ -63,13 +87,17 @@ export default function Home(){
                         ))
                     }
                 </Row>
-                {/*pagination.totalPages > 1 ? <Row>
-                    <Pagination
-                        totalPages={ pagination.totalPages }
-                        active={ pagination.active }
-                        setPageCurrent={ obj=>dispatch({ type: 'SET_PAGE_CURRENT_MOVIE', payload: obj }) }
-                    />
-                </Row> : false*/}
+                { search.totalPages > 1 ? <Row>
+                    <Col className='pagination-col'>
+                        <Pagination
+                            activePage={ activePage }
+                            setActivePage={ setActivePage }
+                            totalPages={ search.totalPages }
+                            filter={ filter }
+
+                        />
+                    </Col>
+                </Row> : false }
                 <Row>
                     <Footer />
                 </Row>

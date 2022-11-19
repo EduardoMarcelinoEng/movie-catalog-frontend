@@ -1,0 +1,17 @@
+ul.MuiPagination-ul button,
+.MuiPagination-ul .MuiPaginationItem-root {
+    color: white;
+}
+
+ul.MuiPagination-ul button.Mui-selected {
+    background-color: var(--color-primary);
+}
+
+ul.MuiPagination-ul button.Mui-selected:hover {
+    background-color: red;
+}
+
+.pagination.navigation {
+    display: flex;
+    justify-content: center;
+}
