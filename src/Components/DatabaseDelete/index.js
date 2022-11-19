@@ -16,7 +16,7 @@ function MyVerticallyCenteredModal(props) {
             .catch(error=>utils.createNotification({
                 type: 'error',
                 title: 'Erro ao deletar banco de dados!',
-                message: error && error.response && error.response.data ? error.response.data : ''
+                message: error?.response?.data
             }));
     }
 

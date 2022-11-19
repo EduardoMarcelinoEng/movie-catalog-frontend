@@ -29,7 +29,7 @@ export default function Filter({ id, setId, description, title, setTitle, setDes
                 utils.createNotification({
                     type: 'error',
                     title: 'Erro ao carregar filmes!',
-                    message: error && error.response && error.response.data ? error.response.data : ''
+                    message: error?.response?.data
                 });
                 dispatch({type: 'IS_LOADING_MOVIE', payload: false});
             });
